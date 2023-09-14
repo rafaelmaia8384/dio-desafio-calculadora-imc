@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio_desafio_calculadora_imc/models/model_pessoa.dart';
+import 'package:dio_desafio_calculadora_imc/services/imc_result.dart';
 
 void main(List<String> arguments) {
   String? nome;
@@ -20,7 +21,7 @@ void main(List<String> arguments) {
   }
 
   while (true) {
-    print('Digite seu peso: ');
+    print('Digite seu peso (kg): ');
     peso = double.parse(stdin.readLineSync() ?? '0.0');
     if (peso > 0.0) {
       break;
@@ -30,7 +31,7 @@ void main(List<String> arguments) {
   }
 
   while (true) {
-    print('Digite sua altura: ');
+    print('Digite sua altura (m): ');
     altura = double.parse(stdin.readLineSync() ?? '0.0');
     if (altura > 0.0) {
       break;
@@ -47,5 +48,7 @@ void main(List<String> arguments) {
 
   print('\nCalculando seu IMC...');
   sleep(Duration(seconds: 2));
-  print('Seu IMC é: ${pessoa.getIMC()}');
+  String imc = pessoa.getIMC();
+  String result = getIMCResult(double.parse(imc));
+  print('${pessoa.nome}, seu IMC é: $imc. $result.');
 }
